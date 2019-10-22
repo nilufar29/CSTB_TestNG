@@ -90,8 +90,8 @@ public class Day1 {
 		
 		driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
 		Actions action = new Actions(driver);
-		action.moveToElement(driver.findElement(By.xpath("//li[contains(@id, 'menu-item')]//a[contains(text(), 'ISTQB® Partner Program')]"))).perform();
-		driver.findElement(By.xpath("//ul[@class = 'sub-menu']//a[contains(text(), 'ISTQB® Partner Program Guidelines')]")).click();
+		action.moveToElement(driver.findElement(By.xpath("//li[contains(@id, 'menu-item')]//a[contains(text(), 'ISTQBÂ® Partner Program')]"))).perform();
+		driver.findElement(By.xpath("//ul[@class = 'sub-menu']//a[contains(text(), 'ISTQBÂ® Partner Program Guidelines')]")).click();
 			
 		expected = "https://cstb.ca/istqb-partner-program-guidelines";
 		actual = driver.getCurrentUrl();
@@ -103,7 +103,7 @@ public class Day1 {
 	public void verifyTrainingProvidersTab() {
 
 		driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
-		driver.findElement(By.xpath("//a[contains(text(), 'ISTQB® Training Providers')]")).click();
+		driver.findElement(By.xpath("//a[contains(text(), 'ISTQBÂ® Training Providers')]")).click();
 			
 		expected = "https://cstb.ca/accredited-training";
 		actual = driver.getCurrentUrl();
@@ -184,7 +184,10 @@ public class Day1 {
 		List<WebElement> bookInfoList = driver.findElements(By.xpath("//h3[contains(text(), 'Advanced Level Books')]//following-sibling::p"));
 
 		for (int i = 0; i < bookInfoList.size(); i++) {
-
+			/* we should define the variables inside function, after the function starting point. specially
+			   in this case string is immuatble in java. so every time it will create new instance and it will be there. 
+			   I think gc will delete those periodically. but better we should avoid this kind of situation so that memory allocation will be better.
+			*/
 			String bookInfo = bookInfoList.get(i).getText();
 
 			String bookName = bookInfo.substring(0, bookInfo.indexOf("by"));
